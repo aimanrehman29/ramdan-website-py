@@ -26,18 +26,21 @@ if menu == "Home 🏠":
 # --- Sehri & Iftar Timings ---
 elif menu == "Sehri & Iftar Timings ⏳":
     st.header("⏳ Sehri & Iftar Timings")
-    st.write("write your city name to know its time .")
-    city = st.text_input("Enter your city:", "Makkah")
-    
-    if st.button("Get Timings"):
-        try:
-            api_url = f"https://api.aladhan.com/v1/timingsByCity?city={city}&country=&method=2"
-            response = requests.get(api_url).json()
-            fajr = response['data']['timings']['Fajr']
-            maghrib = response['data']['timings']['Maghrib']
-            st.success(f"🌅 Sehri (Fajr) Time: {fajr} | 🌇 Iftar (Maghrib) Time: {maghrib}")
-        except:
-            st.error("⚠️ Unable to fetch timings. Please check the city name.")
+st.write("Write your city name to know its time.")
+
+city = st.text_input("Enter your city:", "Karachi")
+country =  st.text_input("Enter your country:", "pakistan")
+method = 1 
+
+if st.button("Get Timings"):
+    try:
+        api_url = f"https://api.aladhan.com/v1/timingsByCity?city={city}&country={country}&method={method}"
+        response = requests.get(api_url).json()
+        fajr = response['data']['timings']['Fajr']
+        maghrib = response['data']['timings']['Maghrib']
+        st.success(f"{city}:🌅 Sehri (Fajr) Time: {fajr} | 🌇 Iftar (Maghrib) Time: {maghrib}")
+    except:
+        st.error("⚠️ Unable to fetch timings. Please check the city name.")
 
 # --- Quran Tracker ---
 elif menu == "Quran Tracker 📖":
